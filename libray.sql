@@ -1,0 +1,115 @@
+CREATE TABLE kategori (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+CREATE TABLE author (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+CREATE TABLE peminjam (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+CREATE TABLE petugas (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+
+CREATE TABLE transaksi (
+    id SERIAL PRIMARY KEY,
+    id_peminjam INT REFERENCES peminjam(id),
+    id_petugas INT REFERENCES petugas(id),
+    tanggal_pinjam DATE,
+    tanggal_dikembalikan DATE
+);
+
+CREATE TABLE buku (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255),
+    id_kategori INT REFERENCES kategori(id),
+    id_author INT REFERENCES author(id),
+    id_transaksi INT REFERENCES transaksi(id),
+    release_at DATE
+);
+
+
+-- INSERT INTO kategori (name) VALUES
+-- ('Novel'),
+-- ('Teknologi'),
+-- ('Sejarah'),
+-- ('Agama'),
+-- ('Sains'),
+-- ('Komik'),
+-- ('Bisnis'),
+-- ('Psikologi'),
+-- ('Pendidikan'),
+-- ('Biografi');
+
+
+-- INSERT INTO author (name) VALUES
+-- ('Tere Liye'),
+-- ('Andrea Hirata'),
+-- ('Raditya Dika'),
+-- ('Pramoedya Ananta Toer'),
+-- ('Habiburrahman El Shirazy'),
+-- ('Yuval Noah Harari'),
+-- ('Dewi Lestari'),
+-- ('Ahmad Fuadi'),
+-- ('Eko Kurniawan'),
+-- ('Najwa Shihab');
+
+-- INSERT INTO peminjam (name) VALUES
+-- ('Andi'),
+-- ('Budi'),
+-- ('Citra'),
+-- ('Dewi'),
+-- ('Eko'),
+-- ('Farhan'),
+-- ('Gina'),
+-- ('Hendra'),
+-- ('Intan'),
+-- ('Joko');
+
+-- INSERT INTO petugas (name) VALUES
+-- ('Admin 1'),
+-- ('Admin 2'),
+-- ('Rudi'),
+-- ('Sinta'),
+-- ('Bagas');
+
+-- INSERT INTO transaksi (id_peminjam, id_petugas, tanggal_pinjam, tanggal_dikembalikan) VALUES
+-- (1, 1, '2026-01-01', '2026-01-08'),
+-- (2, 2, '2026-01-02', '2026-01-09'),
+-- (3, 3, '2026-01-03', '2026-01-10'),
+-- (4, 4, '2026-01-04', '2026-01-11'),
+-- (5, 5, '2026-01-05', '2026-01-12'),
+-- (6, 1, '2026-01-06', '2026-01-13'),
+-- (7, 2, '2026-01-07', '2026-01-14'),
+-- (8, 3, '2026-01-08', '2026-01-15'),
+-- (9, 4, '2026-01-09', '2026-01-16'),
+-- (10, 5, '2026-01-10', '2026-01-17');
+
+
+-- INSERT INTO buku (title, id_kategori, id_author, id_transaksi, release_at) VALUES
+-- ('Laskar Pelangi', 1, 2, 1, '2005-09-01'),
+-- ('Bumi Manusia', 3, 4, 2, '1980-01-01'),
+-- ('Negeri 5 Menara', 9, 8, 3, '2009-01-01'),
+-- ('Ayat-Ayat Cinta', 4, 5, 4, '2004-01-01'),
+-- ('Sapiens', 5, 6, 5, '2011-01-01'),
+-- ('Perahu Kertas', 1, 7, 6, '2009-01-01'),
+-- ('Koala Kumal', 6, 3, 7, '2015-01-01'),
+-- ('Filosofi Teras', 8, 9, 8, '2018-01-01'),
+-- ('Catatan Najwa', 10, 10, 9, '2016-01-01'),
+-- ('Atomic Habits', 7, 1, 10, '2018-01-01');
+
+SELECT id, name from kategori
+SELECT id, name from author
+SELECT id, name from peminjam
+SELECT id, name from petugas
+
+SELECT id , id_peminjam , id_petugas, tanggal_pinjam ,tanggal_dikembalikan FROM transaksi
+SELECT id, title, id_kategori, id_author, id_transaksi , release_at FROM buku
