@@ -1,6 +1,8 @@
 ```mermaid
 erDiagram
-        transaksi {
+    transaksi ||--o{ history : memiliki
+    transaksi ||--o{ detail_pinjaman : berisi
+    transaksi {
         int id PK
         int id_peminjam FK
         int id_petugas FK
@@ -9,47 +11,65 @@ erDiagram
     }
 
 
+    buku ||--o{ detail_pinjaman : dipinjam
     buku {
         int id PK
         string title
         int id_katagori FK
         int id_author FK  
-        int id_transaksi Fk      
-        time tanggal_release
+        int id_rak FK
+        date tanggal_release
     }
 
+    katagori ||--o{ buku : memiliki
     katagori {
         int id PK
         string category_name
     }
 
+    peminjam ||--o{ transaksi : melakukan
     peminjam {
         int id PK
         string name
     }
 
+    author ||--o{ buku : menulis
     author {
         int id PK
         string name
     }
-    rak_buku {
-        int id pk
-        int id_buku fk
+
+    rak_buku ||--o{ buku : menyimpan
+        rak_buku {
+        int id PK
+        string nama_rak
+        string lokasi
     }
-      petugas {
+
+    
+    petugas ||--o{ transaksi : melayani
+    petugas {
         int id PK
         string name
     }
 
-    katagori ||--o{ buku : memiliki
-    author ||--o{ buku : menulis
-    rak_buku ||--o{ buku : penyimpan
+    detail_pinjaman {
+        int id PK
+        int id_transaksi FK
+        int id_buku FK
+        int quantity
+        int rental_price
+     }
 
-    buku ||--o{ transaksi : dipinjam
-    peminjam ||--o{ transaksi : melakukan
-    petugas ||--o{ transaksi : melayani
+    history {
+        int id PK
+        int id_transaksi FK
+        string status
+        timestamp update
+    }
 
 ```
+
 # Entitas dan Penjelasan
 
 ## 1. Buku

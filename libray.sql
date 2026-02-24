@@ -35,8 +35,34 @@ CREATE TABLE buku (
     id_transaksi INT REFERENCES transaksi(id),
     release_at DATE
 );
+SELECT * from buku
+ALTER TABLE buku
+DROP COLUMN id_transaksi;
+ALTER TABLE buku
+ADD COLUMN id_rak INT REFERENCES rak_buku(id);
 
+CREATE TABLE rak_buku(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(225)
+);
+ALTER TABLE rak_buku
+ADD column lokasi VARCHAR(225)
 
+CREATE TABLE detail_pinjaman(
+    id SERIAL PRIMARY KEY,
+    id_transaksi INT REFERENCES transaksi(id),
+    id_buku INT REFERENCES buku(id),
+    quantity INT,
+    rental_price INT,
+    subtotal INT
+)
+
+CREATE TABLE history(
+    id SERIAL PRIMARY KEY,
+    id_transaksi INT REFERENCES transaksi(id),
+    status VARCHAR(255),
+    update DATE
+)
 -- INSERT INTO kategori (name) VALUES
 -- ('Novel'),
 -- ('Teknologi'),
